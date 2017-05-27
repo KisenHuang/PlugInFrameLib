@@ -170,8 +170,11 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
 数据处理，封装了OkHttp3。将获取数据通过Presenter传递给View
 
    public abstract class MvpModel {
+
        protected BasePresenter presenter;
+
        protected Context context;
+
        private static final String TAG = "MvpModel";
 
        public MvpModel(BasePresenter presenter) {
