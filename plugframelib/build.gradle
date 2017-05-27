@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    //系统库
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-annotations:$rootProject.ext.supportVersion"
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-v4:$rootProject.ext.constraint_layout"
+    //图片加载库
+    compile "com.github.bumptech.glide:glide:$rootProject.ext.glide"
+    //adapter 适配库
+    compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.adapterHelper"
+    //网络请求库
+    compile "com.squareup.okhttp3:okhttp:$rootProject.ext.okhttp"
+    compile "com.squareup.okio:okio:$rootProject.ext.okio"
+    compile "com.zhy:okhttputils:$rootProject.ext.okhttputils"
+    //事件处理
+    compile "org.greenrobot:eventbus:$rootProject.ext.eventbus"
+    //简化View
+    compile "com.jakewharton:butterknife:$rootProject.ext.butterknife"
+    apt "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
+    //json解析
+    compile "com.google.code.gson:gson:$rootProject.ext.gson"
+    compile "com.alibaba:fastjson:$rootProject.ext.fastjson"
+}

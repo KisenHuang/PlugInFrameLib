@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kisen.baselibs.view.recyclerhelper.helper.swipemenu.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.kisen.baselibs.view.recyclerhelper.helper.swipemenu.SwipeMenuGroup
+        android:id="@+id/swipe_menu_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/container_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.kisen.baselibs.view.recyclerhelper.helper.swipemenu.SwipeMenuGroup
+        android:id="@+id/swipe_menu_right"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+</com.kisen.baselibs.view.recyclerhelper.helper.swipemenu.SwipeLayout>
