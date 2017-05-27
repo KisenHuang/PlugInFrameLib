@@ -33,6 +33,7 @@ public class FragmentConfig extends FragmentManager.FragmentLifecycleCallbacks {
     private QuickAdapter adapter;
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onFragmentActivityCreated(FragmentManager fm, Fragment f, Bundle savedInstanceState) {
         if (isBaseView(f)) {
             BaseView mvpView = (BaseView) f;
@@ -45,15 +46,8 @@ public class FragmentConfig extends FragmentManager.FragmentLifecycleCallbacks {
             presenter = mvpView.newPresenter();
             if (presenter != null)
                 presenter.attachView(mvpView);
-        }
-    }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void onFragmentStarted(FragmentManager fm, Fragment f) {
-        if (isBaseView(f)) {
-            BaseView baseView = (BaseView) f;
-            baseView.init(presenter);
+            mvpView.init(presenter);
             if (isBaseListView(f)) {
                 if (!isBaseListPresenter(presenter))
                     return;

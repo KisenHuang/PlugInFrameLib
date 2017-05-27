@@ -2,6 +2,7 @@ package com.kisen.plugframelib.config;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentHelper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class MvpActivityConfig extends ActivityConfig {
     private FragmentConfig fragmentConfig;
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         if (isBaseView(activity)) {
             BaseView mvpView = (BaseView) activity;
@@ -40,16 +42,8 @@ public class MvpActivityConfig extends ActivityConfig {
             presenter = mvpView.newPresenter();
             if (presenter != null)
                 presenter.attachView(mvpView);
-        }
-        setupFragmentConfig(activity);
-    }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public void onActivityStarted(Activity activity) {
-        if (isBaseView(activity)) {
-            BaseView baseView = (BaseView) activity;
-            baseView.init(presenter);
+            mvpView.init(presenter);
             if (isBaseListView(activity)) {
                 if (!isBaseListPresenter(presenter))
                     return;
@@ -60,6 +54,11 @@ public class MvpActivityConfig extends ActivityConfig {
                 setListener(listView);
             }
         }
+    }
+
+    @Override
+    public void onActivityStarted(Activity activity) {
+        setupFragmentConfig(activity);
     }
 
     private void setListener(final BaseListView listView) {
