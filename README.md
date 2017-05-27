@@ -168,6 +168,7 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
 
 ## Model
 数据处理，封装了OkHttp3。将获取数据通过Presenter传递给View
+{@link MvpModel#getCallback(NetWorkCallback)}方法，将callback进行封装，并通知BaseView网络请求状态
 
    public abstract class MvpModel {
 
