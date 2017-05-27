@@ -45,7 +45,7 @@ public class BaseApplication extends Application {
     }
 
     private void setupCallback() {
-        activityConfigs.put("mvp", new MvpActivityConfig());
+        addActivityConfigs("mvp", new MvpActivityConfig());
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
