@@ -167,7 +167,7 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
     }
 
 ## Model
-数据处理，封装了OkHttp3。将获取数据通过Presenter传递给View。
+数据处理，封装了OkHttp3。将获取数据通过Presenter传递给View
 
    /**
     * 标题：MVP 模式下 Model基类
@@ -283,7 +283,6 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
                }
            };
        }
-
    }
 
 
