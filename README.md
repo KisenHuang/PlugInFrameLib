@@ -166,72 +166,9 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
         void onLoad();
     }
 
+
 ## Model
-
-数据处理，封装了OkHttp3。将获取数据通过Presenter传递给View
-{@link MvpModel#getCallback(NetWorkCallback)}方法，将callback进行封装，并通知BaseView网络请求状态
-
-
-   public abstract class MvpModel {
-
-       protected BasePresenter presenter;
-
-       protected Context context;
-
-       private static final String TAG = "MvpModel";
-
-       public MvpModel(BasePresenter presenter) {
-           this.presenter = presenter;
-           context = presenter.getView().getContext();
-       }
-
-       protected void postString(String url, String content, @HttpMediaType.ContentType String contentType,
-                                 int reqCode, final NetWorkCallback<String> callback) {
-           HttpClient.postString(context, url, content, contentType, reqCode, getCallback(callback));
-       }
-
-       protected void post(String url, RequestParam param, int reqCode, final NetWorkCallback<String> callback) {
-           HttpClient.post(context, url, param, reqCode, getCallback(callback));
-       }
-
-       protected void get(String url, RequestParam param, int reqCode, final NetWorkCallback<String> callback) {
-           HttpClient.get(context, url, param, reqCode, getCallback(callback));
-       }
-
-       protected void put(String url, String content, @HttpMediaType.ContentType String contentType,
-                          int reqCode, final NetWorkCallback<String> callback) {
-           HttpClient.put(context, url, content, contentType, reqCode, getCallback(callback));
-       }
-
-       protected void delete(String url, String content, @HttpMediaType.ContentType String contentType,
-                             int reqCode, final NetWorkCallback<String> callback) {
-           HttpClient.delete(context, url, content, contentType, reqCode, getCallback(callback));
-       }
-
-       @NonNull
-       protected NetWorkCallback<String> getCallback(final NetWorkCallback<String> callback) {
-           return new NetWorkCallback<String>() {
-               @Override
-               @SuppressWarnings("unchecked")
-               public void success(String result, int id) {
-                   presenter.getView().handleSuccess(result, id);
-                   callback.success(result, id);
-               }
-
-               @Override
-               public void fail(Exception e, int id) {
-                   presenter.getView().handleFail(e, id);
-                   callback.fail(e, id);
-               }
-
-               @Override
-               public void finish(int id) {
-                   presenter.getView().handleFinish(id);
-                   callback.finish(id);
-               }
-           };
-       }
-   }
+数据处理，主要负责网络请求，封装了OkHttp3。将获取数据通过Presenter传递给View
 
 ## Data
 数据模型，默认实现Parcelable接口。
