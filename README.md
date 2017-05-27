@@ -169,15 +169,6 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
 ## Model
 数据处理，封装了OkHttp3。将获取数据通过Presenter传递给View
 
-   /**
-    * 标题：MVP 模式下 Model基类
-    * <p>
-    * <h>主要负责网络请求</h>
-    * 封装okHttp的get、post请求
-    * <h>通知BaseView</h>
-    * {@link MvpModel#getCallback(NetWorkCallback)}方法，将callback进行封装，并通知BaseView网络请求状态
-    * </p>
-    */
    public abstract class MvpModel {
 
        protected BasePresenter presenter;
@@ -284,7 +275,6 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
            };
        }
    }
-
 
 ## Data
 数据模型，默认实现Parcelable接口。
