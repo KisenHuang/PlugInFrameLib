@@ -185,77 +185,29 @@ handleSuccess，handleFail，handleFinish 是Model处理数据的结果回调方
            context = presenter.getView().getContext();
        }
 
-       /**
-        * post String 请求
-        *
-        * @param url      请求url
-        * @param content  body
-        * @param reqCode  请求码
-        * @param callback 请求回调
-        */
        protected void postString(String url, String content, @HttpMediaType.ContentType String contentType,
                                  int reqCode, final NetWorkCallback<String> callback) {
            HttpClient.postString(context, url, content, contentType, reqCode, getCallback(callback));
        }
 
-       /**
-        * post请求
-        *
-        * @param url      请求url
-        * @param param    请求参数
-        * @param reqCode  请求码
-        * @param callback 请求回调
-        */
        protected void post(String url, RequestParam param, int reqCode, final NetWorkCallback<String> callback) {
            HttpClient.post(context, url, param, reqCode, getCallback(callback));
        }
 
-       /**
-        * get请求
-        *
-        * @param url      请求url
-        * @param param    请求参数
-        * @param reqCode  请求码
-        * @param callback 请求回调
-        */
        protected void get(String url, RequestParam param, int reqCode, final NetWorkCallback<String> callback) {
            HttpClient.get(context, url, param, reqCode, getCallback(callback));
        }
 
-       /**
-        * put请求
-        *
-        * @param url      请求url
-        * @param content  body
-        * @param reqCode  请求码
-        * @param callback 请求回调
-        */
        protected void put(String url, String content, @HttpMediaType.ContentType String contentType,
                           int reqCode, final NetWorkCallback<String> callback) {
            HttpClient.put(context, url, content, contentType, reqCode, getCallback(callback));
        }
 
-       /**
-        * delete请求
-        *
-        * @param url      请求url
-        * @param content  body
-        * @param reqCode  请求码
-        * @param callback 请求回调
-        */
        protected void delete(String url, String content, @HttpMediaType.ContentType String contentType,
                              int reqCode, final NetWorkCallback<String> callback) {
            HttpClient.delete(context, url, content, contentType, reqCode, getCallback(callback));
        }
 
-       /**
-        * 封装callback
-        * 所有请求的回调必须经过这一层封装
-        * 它会通知BaseView的请求回调
-        *
-        * @param callback 返回的数据
-        * @return 封装后的callback
-        */
        @NonNull
        protected NetWorkCallback<String> getCallback(final NetWorkCallback<String> callback) {
            return new NetWorkCallback<String>() {
