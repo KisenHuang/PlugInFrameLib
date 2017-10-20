@@ -41,6 +41,7 @@ public class FragmentConfig extends FragmentManager.FragmentLifecycleCallbacks {
             if (vh.mContainer != null && vh.mContainerId > 0 && vh.mContainerId != View.NO_ID) {
                 vh.mContainer.removeAllViews();
                 vh.mContainer.addView(vh.mView);
+                //ButterKnife注入
                 unbinder = ButterKnife.bind(f, vh.mView);
             }
             presenter = mvpView.newPresenter();
@@ -48,18 +49,22 @@ public class FragmentConfig extends FragmentManager.FragmentLifecycleCallbacks {
                 presenter.attachView(mvpView);
 
             mvpView.init(presenter);
+            //处理列表界面
             if (isBaseListView(f)) {
                 if (!isBaseListPresenter(presenter))
                     return;
                 BaseListView listView = (BaseListView) f;
                 ensureList((BaseListPresenter) presenter, listView);
-                listView.loadData();
                 setAdapter(listView);
                 setListener(listView);
+                listView.loadData();
             }
         }
     }
 
+    /**
+     * RecyclerView设置适配器，添加空试图控制
+     */
     private void setAdapter(final BaseListView listView) {
         if (adapter == null)
             return;
@@ -91,6 +96,9 @@ public class FragmentConfig extends FragmentManager.FragmentLifecycleCallbacks {
         HttpClient.cancelByTag(f);
     }
 
+    /**
+     * 初始化刷新加载监听
+     */
     private void setListener(final BaseListView listView) {
         listView.getRefreshLayout().setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -98,33 +106,39 @@ public class FragmentConfig extends FragmentManager.FragmentLifecycleCallbacks {
                 listView.onRefresh();
             }
         });
-        if (adapter!= null){
+        if (adapter != null) {
             adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
                     listView.onLoad();
                 }
-            });
+            }, listView.getRecyclerView());
         }
     }
 
+    /**
+     * 判断当前Presenter是否是BaseListPresenter子类
+     */
     private boolean isBaseListPresenter(BasePresenter presenter) {
         return presenter != null && presenter instanceof BaseListPresenter;
     }
 
-    private void ensureList(BaseListPresenter presenter, BaseListView activity) {
+    /**
+     * 初始化RecyclerView，空试图和Adapter
+     */
+    private void ensureList(BaseListPresenter presenter, BaseListView fragment) {
         if (adapter != null)
             return;
-        if (activity.getRefreshLayout() == null)
+        if (fragment.getRefreshLayout() == null)
             return;
-        if (activity.getRecyclerView() == null)
+        if (fragment.getRecyclerView() == null)
             return;
-        View emptyView = activity.getEmptyView();
+        View emptyView = fragment.getEmptyView();
         if (emptyView != null)
             emptyView.setVisibility(View.GONE);
-        activity.getRecyclerView().setLayoutManager(new LinearLayoutManager(activity.getContext()));
+        fragment.getRecyclerView().setLayoutManager(new LinearLayoutManager(fragment.getContext()));
         adapter = presenter.getAdapter();
-        adapter.openLoadMore(activity.getPageSize(), true);
+        adapter.setEnableLoadMore(true);
     }
 
     private boolean isBaseView(Fragment fragment) {

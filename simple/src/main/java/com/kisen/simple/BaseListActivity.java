@@ -1,15 +1,18 @@
 package com.kisen.simple;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.kisen.plugframelib.mvp.presenter.BaseListPresenter;
 import com.kisen.plugframelib.mvp.view.BaseListView;
+
+import butterknife.BindView;
 
 /**
  * 标题：
@@ -17,21 +20,24 @@ import com.kisen.plugframelib.mvp.view.BaseListView;
  * 版本：
  * 创建时间：on 2017/5/27 17:05.
  */
-public abstract class BaseListActivity<P extends BaseListPresenter> extends AppCompatActivity implements BaseListView<P> {
+public abstract class BaseListActivity<P extends BaseListPresenter> extends BaseActivity<P>
+        implements BaseListView<P> {
+
+    @BindView(R.id.iv_empty)
+    ImageView ivEmpty;
+    @BindView(R.id.tv_empty)
+    TextView tvEmpty;
+    @BindView(android.R.id.empty)
+    FrameLayout empty;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+    @BindView(R.id.refresh_layout)
+    SwipeRefreshLayout refreshLayout;
+    protected P mPresenter;
 
     @Override
-    public void openLoadingAnim() {
-
-    }
-
-    @Override
-    public void closeLoadingAnim() {
-
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
+    public void init(P presenter) {
+        mPresenter = presenter;
     }
 
     @Override
@@ -40,72 +46,78 @@ public abstract class BaseListActivity<P extends BaseListPresenter> extends AppC
     }
 
     @Override
-    public void init(P presenter) {
-
-    }
-
-    @Override
-    public void handleSuccess(String result, int id) {
-
-    }
-
-    @Override
-    public void handleFail(Exception e, int id) {
-
-    }
-
-    @Override
-    public void handleFinish(int id) {
-
-    }
-
-    @Override
     public SwipeRefreshLayout getRefreshLayout() {
-        return null;
+        return refreshLayout;
     }
 
     @Override
     public RecyclerView getRecyclerView() {
-        return null;
+        return recyclerView;
+    }
+
+    @Override
+    public void handleSuccess(String result, int id) {
+        super.handleSuccess(result, id);
+    }
+
+    @Override
+    public void handleFail(Exception e, int id) {
+        super.handleFail(e, id);
+    }
+
+    @Override
+    public void handleFinish(int id) {
+        super.handleFinish(id);
     }
 
     @Override
     public View getEmptyView() {
-        return null;
+        return empty;
     }
 
     @Override
     public void setEmptyImage(Drawable drawable) {
-
+        if (ivEmpty != null) {
+            ivEmpty.setImageDrawable(drawable);
+        }
     }
 
     @Override
     public void setEmptyImage(int resId) {
-
+        if (ivEmpty != null) {
+            ivEmpty.setImageResource(resId);
+        }
     }
 
     @Override
-    public void setEmptyText(CharSequence c) {
-
+    public void setEmptyText(CharSequence empty) {
+        if (tvEmpty != null)
+            tvEmpty.setText(empty);
     }
 
     @Override
     public void setEmptyText(int resId) {
-
+        if (tvEmpty != null)
+            tvEmpty.setText(resId);
     }
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-
+        if (refreshLayout != null)
+            refreshLayout.setBackgroundColor(color);
     }
 
     @Override
     public void setRefreshing(boolean refresh) {
-
+        if (refreshLayout != null) {
+            refreshLayout.setRefreshing(refresh);
+        }
     }
 
     @Override
     public void loadData() {
-
+        openLoadingAnim();
+        setRefreshing(true);
+        onRefresh();
     }
 }

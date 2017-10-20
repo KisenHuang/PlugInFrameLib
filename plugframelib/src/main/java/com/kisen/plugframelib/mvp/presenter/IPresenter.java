@@ -10,14 +10,14 @@ import com.kisen.plugframelib.mvp.view.BaseView;
  * Created by huang on 2017/2/7.
  */
 
-public interface IPresenter {
+public interface IPresenter<V> {
 
     /**
      * Presenter被初始化时调用
      *
      * @param view Activity对象
      */
-    void attachView(BaseView view);
+    void attachView(V view);
 
     /**
      * Activity被销毁时调用

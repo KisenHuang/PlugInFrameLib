@@ -2,7 +2,6 @@ package com.kisen.plugframelib.config;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentHelper;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -49,9 +48,9 @@ public class MvpActivityConfig extends ActivityConfig {
                     return;
                 BaseListView listView = (BaseListView) activity;
                 ensureList((BaseListPresenter) presenter, listView);
-                listView.loadData();
                 setAdapter(listView);
                 setListener(listView);
+                listView.loadData();
             }
         }
     }
@@ -74,7 +73,7 @@ public class MvpActivityConfig extends ActivityConfig {
                 public void onLoadMoreRequested() {
                     listView.onLoad();
                 }
-            });
+            }, listView.getRecyclerView());
         }
     }
 
@@ -94,7 +93,7 @@ public class MvpActivityConfig extends ActivityConfig {
             emptyView.setVisibility(View.GONE);
         activity.getRecyclerView().setLayoutManager(new LinearLayoutManager(activity.getContext()));
         adapter = presenter.getAdapter();
-        adapter.openLoadMore(activity.getPageSize(), true);
+        adapter.setEnableLoadMore(true);
     }
 
     private void setAdapter(final BaseListView listView) {

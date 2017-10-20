@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.kisen.plugframelib.R;
 import com.kisen.plugframelib.mvp.listhelper.IAdapter;
-import com.kisen.plugframelib.mvp.listhelper.QuickAdapter;
+import com.kisen.plugframelib.mvp.listhelper.QuickMvpAdapter;
 
 /**
  * @Title : 带侧滑按钮适配器
@@ -16,7 +16,7 @@ import com.kisen.plugframelib.mvp.listhelper.QuickAdapter;
  * @Version : v2.1.5
  * Created by huang on 2016/12/5.
  */
-public class SwipeCommonAdapter extends QuickAdapter {
+public class SwipeCommonAdapter extends QuickMvpAdapter {
 
     private SwipeMenuCreator creator;
     private Context context;

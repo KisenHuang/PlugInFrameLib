@@ -19,18 +19,27 @@ import com.kisen.simple.R;
  */
 public class MainItem extends Item<MainData> {
 
+    public MainItem(MainData data) {
+        super(data);
+    }
+
     @Override
     public int getItemResId() {
         return R.layout.item_product_grid;
     }
 
     @Override
-    public void onRefreshViewStyle() {
-
+    public Builder builder() {
+        return new Builder() {
+            @Override
+            public Item<MainData> create(MainData data) {
+                return new MainItem(data);
+            }
+        };
     }
 
     @Override
-    public void setViewData(BaseViewHolder helper) {
+    public void convert(BaseViewHolder helper) {
         ImageLoader.getInstance().display(mContext, data.getImageUrl(), (ImageView) helper.getView(R.id.product_image));
         helper.setText(R.id.product_title, data.getProductName());
         TextView price = helper.getView(R.id.product_price);
@@ -50,11 +59,6 @@ public class MainItem extends Item<MainData> {
     @Override
     public boolean itemEnable() {
         return false;
-    }
-
-    @Override
-    public void onItemClick(View v) {
-
     }
 
     @Override

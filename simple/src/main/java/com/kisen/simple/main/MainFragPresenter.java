@@ -1,8 +1,11 @@
 package com.kisen.simple.main;
 
+import android.support.annotation.NonNull;
+
 import com.alibaba.fastjson.JSON;
 import com.kisen.plugframelib.mvp.listhelper.Item;
 import com.kisen.plugframelib.mvp.presenter.BaseListPresenter;
+import com.kisen.plugframelib.mvp.view.BaseListView;
 import com.kisen.plugframelib.mvp.view.BaseView;
 import com.kisen.plugframelib.utils.http.NetWorkCallback;
 
@@ -20,14 +23,15 @@ public class MainFragPresenter extends BaseListPresenter<MainData> implements Ne
     private MainModel mainModel;
 
     @Override
-    public void attachView(BaseView view) {
+    public void attachView(BaseListView view) {
         super.attachView(view);
         mainModel = new MainModel(this);
     }
 
+    @NonNull
     @Override
-    public Item<MainData> setupItemTemplate() {
-        return new MainItem();
+    protected Item<MainData>.Builder createItemBuilder() {
+        return new MainItem(null).builder();
     }
 
     public void onRefresh() {
@@ -43,7 +47,7 @@ public class MainFragPresenter extends BaseListPresenter<MainData> implements Ne
         if (id == 1)
             getAdapter().clear();
         List<MainData> list = JSON.parseArray(JSON.parseObject(result).getString("data"), MainData.class);
-        notifyAfterLoad(list, false);
+        notifyAfterLoad(list);
     }
 
     @Override
@@ -52,5 +56,7 @@ public class MainFragPresenter extends BaseListPresenter<MainData> implements Ne
 
     @Override
     public void finish(int id) {
+        if (id == 1 || id == 2)
+            getView().setRefreshing(false);
     }
 }

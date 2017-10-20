@@ -2,7 +2,6 @@ package com.kisen.simple;
 
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,9 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kisen.plugframelib.mvp.presenter.BaseListPresenter;
-import com.kisen.plugframelib.mvp.presenter.BasePresenter;
 import com.kisen.plugframelib.mvp.view.BaseListView;
-import com.kisen.simple.main.MainFragPresenter;
 
 import butterknife.BindView;
 
@@ -23,7 +20,8 @@ import butterknife.BindView;
  * 版本：
  * 创建时间：on 2017/5/27 17:08.
  */
-public abstract class BaseListFragment<P extends BaseListPresenter> extends Fragment implements BaseListView<P> {
+public abstract class BaseListFragment<P extends BaseListPresenter> extends BaseFragment<P>
+        implements BaseListView<P> {
 
     @BindView(R.id.iv_empty)
     ImageView ivEmpty;
@@ -38,16 +36,6 @@ public abstract class BaseListFragment<P extends BaseListPresenter> extends Frag
     protected P presenter;
 
     @Override
-    public void openLoadingAnim() {
-
-    }
-
-    @Override
-    public void closeLoadingAnim() {
-
-    }
-
-    @Override
     public int getLayoutId() {
         return R.layout.common_fragment_list;
     }
@@ -59,17 +47,17 @@ public abstract class BaseListFragment<P extends BaseListPresenter> extends Frag
 
     @Override
     public void handleSuccess(String result, int id) {
-
+        super.handleSuccess(result, id);
     }
 
     @Override
     public void handleFail(Exception e, int id) {
-
+        super.handleFail(e, id);
     }
 
     @Override
     public void handleFinish(int id) {
-
+        super.handleFinish(id);
     }
 
     @Override
@@ -84,32 +72,39 @@ public abstract class BaseListFragment<P extends BaseListPresenter> extends Frag
 
     @Override
     public View getEmptyView() {
-        return null;
+        return empty;
     }
 
     @Override
     public void setEmptyImage(Drawable drawable) {
-
+        if (ivEmpty != null) {
+            ivEmpty.setImageDrawable(drawable);
+        }
     }
 
     @Override
     public void setEmptyImage(int resId) {
-
+        if (ivEmpty != null) {
+            ivEmpty.setImageResource(resId);
+        }
     }
 
     @Override
-    public void setEmptyText(CharSequence c) {
-
+    public void setEmptyText(CharSequence empty) {
+        if (tvEmpty != null)
+            tvEmpty.setText(empty);
     }
 
     @Override
     public void setEmptyText(int resId) {
-
+        if (tvEmpty != null)
+            tvEmpty.setText(resId);
     }
 
     @Override
     public void setBackgroundColor(@ColorInt int color) {
-
+        if (refreshLayout != null)
+            refreshLayout.setBackgroundColor(color);
     }
 
     @Override

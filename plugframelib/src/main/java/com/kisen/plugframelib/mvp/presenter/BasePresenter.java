@@ -9,11 +9,11 @@ import com.kisen.plugframelib.mvp.view.BaseView;
  * 普通页面使用的Presenter
  * Created by huang on 2017/2/7.
  */
-public class BasePresenter implements IPresenter {
+public class BasePresenter<V extends BaseView> implements IPresenter<V> {
 
-    private BaseView view;
+    private V view;
 
-    public BaseView getView() {
+    public V getView() {
         return view;
     }
 
@@ -26,7 +26,7 @@ public class BasePresenter implements IPresenter {
     }
 
     @Override
-    public void attachView(BaseView view) {
+    public void attachView(V view) {
         this.view = view;
     }
 

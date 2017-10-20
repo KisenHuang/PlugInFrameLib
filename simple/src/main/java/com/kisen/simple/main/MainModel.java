@@ -20,13 +20,15 @@ public class MainModel extends MvpModel {
         super(presenter);
     }
 
-    public void load(NetWorkCallback<String> callback, int code){
+    public void load(NetWorkCallback<String> callback, int code) {
+        callback = getCallback(callback);
         try {
             String json = AssetsUtil.getJson(context, "mall.json");
-            callback.success(json,code);
+            callback.success(json, code);
             callback.finish(code);
         } catch (IOException e) {
             e.printStackTrace();
+            callback.fail(e, code);
         }
     }
 

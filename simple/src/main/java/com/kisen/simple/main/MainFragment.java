@@ -1,8 +1,5 @@
 package com.kisen.simple.main;
 
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-
 import com.kisen.simple.BaseListFragment;
 
 /**
@@ -14,35 +11,9 @@ import com.kisen.simple.BaseListFragment;
 
 public class MainFragment extends BaseListFragment<MainFragPresenter> {
 
-
     @Override
     public MainFragPresenter newPresenter() {
         return new MainFragPresenter();
-    }
-
-    @Override
-    public void setEmptyImage(Drawable drawable) {
-
-    }
-
-    @Override
-    public void setEmptyImage(int resId) {
-
-    }
-
-    @Override
-    public void setEmptyText(CharSequence c) {
-
-    }
-
-    @Override
-    public void setEmptyText(int resId) {
-
-    }
-
-    @Override
-    public void setBackgroundColor(@ColorInt int color) {
-
     }
 
     @Override

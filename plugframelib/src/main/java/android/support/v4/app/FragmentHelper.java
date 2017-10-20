@@ -8,6 +8,9 @@ import android.view.ViewGroup;
  * 作者：kisen
  * 版本：
  * 创建时间：on 2017/5/27 15:05.
+ * <p>
+ *     获取Fragment中的属性
+ * </p>
  */
 
 public class FragmentHelper {
