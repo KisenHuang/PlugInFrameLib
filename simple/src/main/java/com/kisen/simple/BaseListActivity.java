@@ -58,6 +58,9 @@ public abstract class BaseListActivity<P extends BaseListPresenter> extends Base
     @Override
     public void handleSuccess(String result, int id) {
         super.handleSuccess(result, id);
+        if (id == Constract.REFRESH_CODE && mPresenter != null) {
+            mPresenter.getAdapter().clear();
+        }
     }
 
     @Override
@@ -68,6 +71,7 @@ public abstract class BaseListActivity<P extends BaseListPresenter> extends Base
     @Override
     public void handleFinish(int id) {
         super.handleFinish(id);
+        setRefreshing(false);
     }
 
     @Override

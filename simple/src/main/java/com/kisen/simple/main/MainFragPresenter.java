@@ -8,6 +8,7 @@ import com.kisen.plugframelib.mvp.presenter.BaseListPresenter;
 import com.kisen.plugframelib.mvp.view.BaseListView;
 import com.kisen.plugframelib.mvp.view.BaseView;
 import com.kisen.plugframelib.utils.http.NetWorkCallback;
+import com.kisen.simple.Constract;
 
 import java.util.List;
 
@@ -35,17 +36,15 @@ public class MainFragPresenter extends BaseListPresenter<MainData> implements Ne
     }
 
     public void onRefresh() {
-        mainModel.load(this,1);
+        mainModel.load(this, Constract.REFRESH_CODE);
     }
 
     public void onLoad() {
-        mainModel.load(this,2);
+        mainModel.load(this, Constract.LOAD_CODE);
     }
 
     @Override
     public void success(String result, int id) {
-        if (id == 1)
-            getAdapter().clear();
         List<MainData> list = JSON.parseArray(JSON.parseObject(result).getString("data"), MainData.class);
         notifyAfterLoad(list);
     }

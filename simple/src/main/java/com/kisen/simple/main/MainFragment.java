@@ -23,11 +23,11 @@ public class MainFragment extends BaseListFragment<MainFragPresenter> {
 
     @Override
     public void onRefresh() {
-        presenter.onRefresh();
+        mPresenter.onRefresh();
     }
 
     @Override
     public void onLoad() {
-        presenter.onLoad();
+        mPresenter.onLoad();
     }
 }

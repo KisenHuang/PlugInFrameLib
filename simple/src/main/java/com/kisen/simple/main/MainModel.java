@@ -1,9 +1,12 @@
 package com.kisen.simple.main;
 
+import android.os.Handler;
+
 import com.kisen.plugframelib.mvp.model.MvpModel;
 import com.kisen.plugframelib.mvp.presenter.BasePresenter;
 import com.kisen.plugframelib.utils.AssetsUtil;
 import com.kisen.plugframelib.utils.http.NetWorkCallback;
+import com.kisen.simple.Constract;
 
 import java.io.IOException;
 
@@ -20,16 +23,39 @@ public class MainModel extends MvpModel {
         super(presenter);
     }
 
-    public void load(NetWorkCallback<String> callback, int code) {
+    public void load(NetWorkCallback<String> callback, final int code) {
         callback = getCallback(callback);
-        try {
-            String json = AssetsUtil.getJson(context, "mall.json");
-            callback.success(json, code);
-            callback.finish(code);
-        } catch (IOException e) {
-            e.printStackTrace();
-            callback.fail(e, code);
+        final NetWorkCallback<String> finalCallback = callback;
+        if (code == Constract.REFRESH_CODE) {//刷新
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String json = AssetsUtil.getJson(context, "mall.json");
+                        finalCallback.success(json, code);
+                        finalCallback.finish(code);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        finalCallback.fail(e, code);
+                    }
+                }
+            }, 1000);
+        } else {//加载
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        String json = AssetsUtil.getJson(context, "mall_more.json");
+                        finalCallback.success(json, code);
+                        finalCallback.finish(code);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        finalCallback.fail(e, code);
+                    }
+                }
+            }, 1000);
         }
+
     }
 
 }

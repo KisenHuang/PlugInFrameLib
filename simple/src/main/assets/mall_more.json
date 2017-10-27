@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "brandName": "壳氏唯1",
+      "brandName": "壳氏唯more1",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -9,7 +9,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯2",
+      "brandName": "壳氏唯more2",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -17,7 +17,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯3",
+      "brandName": "壳氏唯more3",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -25,7 +25,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯4",
+      "brandName": "壳氏唯more4",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -33,7 +33,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯5",
+      "brandName": "壳氏唯more5",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -41,7 +41,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯6",
+      "brandName": "壳氏唯more6",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -49,7 +49,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯7",
+      "brandName": "壳氏唯more7",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,
@@ -57,23 +57,7 @@
       "productName": "天然稻壳抗菌砧板"
     },
     {
-      "brandName": "壳氏唯8",
-      "productId": 100001,
-      "price": 139,
-      "listPrice": 159,
-      "imageUrl": "http://oss.jiae.com/media/images/products/2015/10/260_5.jpg",
-      "productName": "天然稻壳抗菌砧板"
-    },
-    {
-      "brandName": "壳氏唯9",
-      "productId": 100001,
-      "price": 139,
-      "listPrice": 159,
-      "imageUrl": "http://oss.jiae.com/media/images/products/2015/10/260_5.jpg",
-      "productName": "天然稻壳抗菌砧板"
-    },
-    {
-      "brandName": "壳氏唯10",
+      "brandName": "壳氏唯more8",
       "productId": 100001,
       "price": 139,
       "listPrice": 159,

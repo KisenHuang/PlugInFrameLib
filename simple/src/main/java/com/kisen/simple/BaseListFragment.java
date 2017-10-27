@@ -33,7 +33,7 @@ public abstract class BaseListFragment<P extends BaseListPresenter> extends Base
     RecyclerView recyclerView;
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout refreshLayout;
-    protected P presenter;
+    protected P mPresenter;
 
     @Override
     public int getLayoutId() {
@@ -42,12 +42,15 @@ public abstract class BaseListFragment<P extends BaseListPresenter> extends Base
 
     @Override
     public void init(P presenter) {
-        this.presenter = presenter;
+        this.mPresenter = presenter;
     }
 
     @Override
     public void handleSuccess(String result, int id) {
         super.handleSuccess(result, id);
+        if (id == Constract.REFRESH_CODE && mPresenter != null) {
+            mPresenter.getAdapter().clear();
+        }
     }
 
     @Override
@@ -58,6 +61,7 @@ public abstract class BaseListFragment<P extends BaseListPresenter> extends Base
     @Override
     public void handleFinish(int id) {
         super.handleFinish(id);
+        setRefreshing(false);
     }
 
     @Override

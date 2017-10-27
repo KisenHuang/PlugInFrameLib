@@ -41,7 +41,7 @@ public class MainItem extends Item<MainData> {
     @Override
     public void convert(BaseViewHolder helper) {
         ImageLoader.getInstance().display(mContext, data.getImageUrl(), (ImageView) helper.getView(R.id.product_image));
-        helper.setText(R.id.product_title, data.getProductName());
+        helper.setText(R.id.product_title, data.getProductName() + "/" + data.getBrandName());
         TextView price = helper.getView(R.id.product_price);
         TextView oldPrice = helper.getView(R.id.product_old_price);
         View layoutOldPrice = helper.getView(R.id.layout_old_price);
